@@ -12,45 +12,45 @@ import java.util.Properties;
  */
 public class SuiteConfiguration {
 
-  private static final String DEBUG_PROPERTIES = "/debug.properties";
+    private static final String DEBUG_PROPERTIES = "/debug.properties";
 
-  private Properties properties;
+    private Properties properties;
 
-  public SuiteConfiguration() throws IOException {
-  	this(System.getProperty("application.properties", DEBUG_PROPERTIES));
-  }
-
-  public SuiteConfiguration(String fromResource) throws IOException {
-    properties = new Properties();
-    properties.load(SuiteConfiguration.class.getResourceAsStream(fromResource));
-  }
-
-  public Capabilities getCapabilities() throws IOException {
-    String capabilitiesFile = properties.getProperty("capabilities");
-
-    Properties capsProps = new Properties();
-    capsProps.load(SuiteConfiguration.class.getResourceAsStream(capabilitiesFile));
-
-    DesiredCapabilities capabilities = new DesiredCapabilities();
-    for (String name : capsProps.stringPropertyNames()) {
-      String value = capsProps.getProperty(name);
-      if (value.toLowerCase().equals("true") || value.toLowerCase().equals("false")) {
-        capabilities.setCapability(name, Boolean.valueOf(value));
-      } else if (value.startsWith("file:")) {
-        capabilities.setCapability(name, new File(".", value.substring(5)).getCanonicalFile().getAbsolutePath());
-      } else {
-        capabilities.setCapability(name, value);
-      }
+    public SuiteConfiguration() throws IOException {
+        this(System.getProperty("application.properties", DEBUG_PROPERTIES));
     }
 
-    return capabilities;
-  }
+    public SuiteConfiguration(String fromResource) throws IOException {
+        properties = new Properties();
+        properties.load(SuiteConfiguration.class.getResourceAsStream(fromResource));
+    }
 
-  public boolean hasProperty(String name) {
-    return properties.containsKey(name);
-  }
+    public Capabilities getCapabilities() throws IOException {
+        String capabilitiesFile = properties.getProperty("capabilities");
 
-  public String getProperty(String name) {
-    return properties.getProperty(name);
-  }
+        Properties capsProps = new Properties();
+        capsProps.load(SuiteConfiguration.class.getResourceAsStream(capabilitiesFile));
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        for (String name : capsProps.stringPropertyNames()) {
+            String value = capsProps.getProperty(name);
+            if (value.toLowerCase().equals("true") || value.toLowerCase().equals("false")) {
+                capabilities.setCapability(name, Boolean.valueOf(value));
+            } else if (value.startsWith("file:")) {
+                capabilities.setCapability(name, new File(".", value.substring(5)).getCanonicalFile().getAbsolutePath());
+            } else {
+                capabilities.setCapability(name, value);
+            }
+        }
+
+        return capabilities;
+    }
+
+    public boolean hasProperty(String name) {
+        return properties.containsKey(name);
+    }
+
+    public String getProperty(String name) {
+        return properties.getProperty(name);
+    }
 }
