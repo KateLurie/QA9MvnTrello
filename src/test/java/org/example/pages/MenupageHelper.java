@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class MenuPageHelper extends PageBase {
+public class MenupageHelper extends PageBase {
     @FindBy(css = ".js-open-header-member-menu")
     WebElement headerMenuButton;
     @FindBy(xpath = "//a[@data-test-id = 'header-member-menu-profile']")
@@ -14,7 +14,7 @@ public class MenuPageHelper extends PageBase {
     @FindBy(xpath = "//span[contains(text(),'Activity')]")
     List<WebElement> activityMenuList;
 
-    public MenuPageHelper(WebDriver driver) {
+    public MenupageHelper(WebDriver driver) {
         this.driver = driver;
     }
 

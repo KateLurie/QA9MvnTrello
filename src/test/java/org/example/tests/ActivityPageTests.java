@@ -10,7 +10,7 @@ public class ActivityPageTests extends TestBase{
     LoginPageHelper loginPage;
     BoardsPageHelper boardsPage;
     CurrentBoardPageHelper qaHaifa9Board;
-    MenuPageHelper menuPage;
+    MenupageHelper menuPage;
     ActivityPageHelper activityPage;
 
     @BeforeMethod
@@ -18,7 +18,7 @@ public class ActivityPageTests extends TestBase{
         loginPage = PageFactory.initElements(driver, LoginPageHelper.class);
         boardsPage = PageFactory.initElements(driver, BoardsPageHelper.class);
         qaHaifa9Board = new CurrentBoardPageHelper(driver, "QA Haifa 9");
-        menuPage = PageFactory.initElements(driver, MenuPageHelper.class);
+        menuPage = PageFactory.initElements(driver, MenupageHelper.class);
         activityPage = PageFactory.initElements(driver, ActivityPageHelper.class);
 
         homePage.waitUntilPageIsLoaded();

@@ -1,6 +1,9 @@
 package org.example.tests;
 
 import org.example.pages.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -11,6 +14,9 @@ public class CurrentBoardTests extends TestBase{
     LoginPageHelper loginPage;
     BoardsPageHelper boardsPage;
     CurrentBoardPageHelper qaHaifa9Board;
+    //MenuPageHelper menuPage;
+    
+
 
     @BeforeMethod
     public void initTests()  {
@@ -18,6 +24,7 @@ public class CurrentBoardTests extends TestBase{
         loginPage = PageFactory.initElements(driver,LoginPageHelper.class);
         boardsPage = PageFactory.initElements(driver,BoardsPageHelper.class);
         qaHaifa9Board = new CurrentBoardPageHelper(driver, "QA Haifa 9");
+       // menuPage = PageFactory.initElements(driver, MenuPageHelper.class);
 
         homePage.waitUntilPageIsLoaded();
         loginPage
@@ -30,8 +37,60 @@ public class CurrentBoardTests extends TestBase{
         qaHaifa9Board
                 .openPage()
                 .waitUntilPageIsLoaded();
+        /*menuPage.openPage();
+        menuPage.openHelpPage();
+        menuPage.waitUntilElementIsVisible();*/
     }
 
+    @Test
+    public void windowsHandlingTest() throws InterruptedException {
+
+        driver.findElement(By.cssSelector(".js-open-header-member-menu")).click();
+
+        driver.findElement(By.xpath("//span[contains(text(),'Help')]")).click();
+        Thread.sleep(3000);
+        String firstWindowHandle = driver.getWindowHandle();
+
+
+        String secondWindowHandle = "";
+        for(String handle: driver.getWindowHandles()) {
+           System.out.println("Handle: "+ handle);
+            if(!handle.equals(firstWindowHandle)) {
+                secondWindowHandle=handle;
+            }
+        }
+        driver.switchTo().window(secondWindowHandle);
+        Thread.sleep(3000);
+        System.out.println("Active help window handle: " + driver.getWindowHandle());
+
+        driver.close();
+        Thread.sleep(3000);
+        driver.switchTo().window(firstWindowHandle);
+        System.out.println("Active previous(first) window handle: " + driver.getWindowHandle());
+    }
+    @Test
+    public void windowsHandlingTest2() throws InterruptedException {
+
+        driver.findElement(By.cssSelector(".js-open-header-member-menu")).click();
+
+        driver.findElement(By.xpath("//span[contains(text(),'Help')]")).click();
+        Thread.sleep(3000);
+        String firstWindowHandle = driver.getWindowHandle();
+        String secondWindowHandle = "";
+        for(String handle: driver.getWindowHandles()) {
+            System.out.println("Handle: "+ handle);
+            if(!handle.equals(firstWindowHandle)) {
+                secondWindowHandle=handle;
+            }
+        }
+        System.out.println("Active QA9 board window handle(before switch): " + driver.getWindowHandle());
+        driver.switchTo().window(secondWindowHandle);
+        Thread.sleep(3000);
+        System.out.println("Active help window handle(after switch): " + driver.getWindowHandle());
+        driver.findElement(By.xpath("//span[contains(text(),'Go to your boards')]")).click();
+        System.out.println("Active 'Go to your boards' window handle(the action in the same window): " + driver.getWindowHandle());
+
+    }
 
     @Test
     public void newListCreatingTest()  {
