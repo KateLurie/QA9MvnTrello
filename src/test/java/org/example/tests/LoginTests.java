@@ -25,13 +25,20 @@ public class LoginTests extends TestBase {
         loginPage.openPage();
         loginPage.waitUntilPageIsLoaded();
     }
+    @Test(dataProviderClass = DataProviders.class, dataProvider = "dataProviderThird2")
+    public void negativeLoginThirddataProv2(String login, String password) {
+        loginPage.loginNotAttl(login, password);
+        Assert.assertEquals(loginPage.getErrorMessage(),
+                "There isn't an account for this username");
+        //"There isn't an account for this email"
+    }
 
-
-    @Test
-    public void negativeLogin() {
-        loginPage.loginNotAttl("ttttmmm", "pppppppp");
-        Assert.assertEquals(loginPage.getErrorMessage(), "There isn't an account for this username",
-                "The error message is not correct");
+    @Test(dataProviderClass = DataProviders.class, dataProvider = "loginNegative2")
+    public void negativeLogin(String login, String password, String message) {
+        loginPage.loginNotAttl(login, password);
+        Assert.assertEquals(loginPage.getErrorMessage(), message,
+                "There isn't an account for this user");
+        //"There isn't an account for this email"
     }
     @Test(dataProviderClass = DataProviders.class, dataProvider = "dataProviderThird")
     public void negativeLoginThirddataProv(String login, String password) {
