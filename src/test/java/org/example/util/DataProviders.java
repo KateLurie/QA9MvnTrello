@@ -48,8 +48,8 @@ public class DataProviders {
     @DataProvider
     public static Iterator<Object[]> dataProviderSecond() {
         List<Object[]> data = new ArrayList<>();
-        data.add(new Object[]{"raspopova12@mail.ru", "raspopova1", "Boards"});
-        data.add(new Object[]{"raspopova12@mail.ru", "raspopova1","BoardsYYY"});
+        data.add(new Object[]{"raspopova12@mail.ru", "worldisbeautiful123", "Boards"});
+        data.add(new Object[]{"raspopova12@mail.ru", "worldisbeautiful123","BoardsYYY"});
         data.add(new Object[]{"raspopova12@mail.ru", "raspopova12222","Boards"});
 
         return data.iterator();

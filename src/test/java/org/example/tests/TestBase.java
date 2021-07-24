@@ -23,7 +23,7 @@ public class TestBase {
   protected static URL gridHubUrl = null;
   protected static String baseUrl;
   protected static Capabilities capabilities;
-  public static String PASSWORD = "raspopova1" ;
+  public static String PASSWORD = "worldisbeautiful123" ;
   public static String  LOGIN ="raspopova12@mail.ru";
   HomePageHelper homePage;
 
