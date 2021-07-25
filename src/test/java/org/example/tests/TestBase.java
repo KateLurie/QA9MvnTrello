@@ -5,6 +5,7 @@ import java.net.URL;
 
 import org.example.SuiteConfiguration;
 import org.example.pages.HomePageHelper;
+import org.example.util.LogLog4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Capabilities;
 
@@ -25,6 +26,7 @@ public class TestBase {
   protected static Capabilities capabilities;
   public static String PASSWORD = "worldisbeautiful123" ;
   public static String  LOGIN ="raspopova12@mail.ru";
+  public static LogLog4j log4j = new LogLog4j();
   HomePageHelper homePage;
 
   protected WebDriver driver;

@@ -15,15 +15,18 @@ public class LoginTests extends TestBase {
     LoginPageHelper loginPage;
     BoardsPageHelper boardsPage;
 
+
     @BeforeMethod
     public void initTests() {
         // homePage = PageFactory.initElements(driver, HomePageHelper.class);
         loginPage = PageFactory.initElements(driver, LoginPageHelper.class);
         boardsPage = PageFactory.initElements(driver, BoardsPageHelper.class);
+        log4j.startMethod("LoginTests - initTests()");
 
         homePage.waitUntilPageIsLoaded();
         loginPage.openPage();
         loginPage.waitUntilPageIsLoaded();
+        log4j.endMethod("LoginTests - initTests()");
     }
     @Test(dataProviderClass = DataProviders.class, dataProvider = "dataProviderThird2")
     public void negativeLoginThirddataProv2(String login, String password) {
@@ -35,9 +38,13 @@ public class LoginTests extends TestBase {
 
     @Test(dataProviderClass = DataProviders.class, dataProvider = "loginNegative2")
     public void negativeLogin(String login, String password, String message) {
+        log4j.startMethod("negativeLogin(), parametres: login="+login + ",password= " + password + ",message=" + message);
+        log4j.info("Enter login not Attl: login= " + login+" password "+password);
         loginPage.loginNotAttl(login, password);
+        log4j.info("Assert message has to be - "+message);
         Assert.assertEquals(loginPage.getErrorMessage(), message,
                 "There isn't an account for this user");
+        log4j.endMethod("negativeLogin(), parametres: login="+login + ",password= " + password + ",message=" + message);
         //"There isn't an account for this email"
     }
     @Test(dataProviderClass = DataProviders.class, dataProvider = "dataProviderThird")
